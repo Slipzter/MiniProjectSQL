@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace MiniProjectSQL
 {
-    public class Person
+    internal class ProjectsPersons
     {
         public int id { get; set; }
-        public string person_name { get; set; }
+        public int project_id { get; set; }
+        public int person_id { get; set; }
+        public int hours { get; set; }
     }
 }
