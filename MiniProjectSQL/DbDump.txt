@@ -15,5 +15,17 @@ CREATE TABLE "public"."thm_person" (
   "person_name" VARCHAR(25) NOT NULL,
   CONSTRAINT "thm_person_pkey" PRIMARY KEY ("id")
 );
+INSERT INTO "public"."thm_project" ("id", "project_name") VALUES (1, 'Undertaker');
+INSERT INTO "public"."thm_project" ("id", "project_name") VALUES (2, 'Uprising');
+INSERT INTO "public"."thm_project" ("id", "project_name") VALUES (3, 'Excalibur');
+INSERT INTO "public"."thm_project_person" ("id", "project_id", "person_id", "hours") VALUES (1, 1, 1, 2);
+INSERT INTO "public"."thm_project_person" ("id", "project_id", "person_id", "hours") VALUES (3, 2, 3, 5);
+INSERT INTO "public"."thm_project_person" ("id", "project_id", "person_id", "hours") VALUES (4, 2, 3, 4);
+INSERT INTO "public"."thm_project_person" ("id", "project_id", "person_id", "hours") VALUES (5, 2, 3, 4);
+INSERT INTO "public"."thm_project_person" ("id", "project_id", "person_id", "hours") VALUES (7, 3, 4, 10);
+INSERT INTO "public"."thm_person" ("id", "person_name") VALUES (1, 'Jonas Svensson');
+INSERT INTO "public"."thm_person" ("id", "person_name") VALUES (2, 'Matilda Ruben');
+INSERT INTO "public"."thm_person" ("id", "person_name") VALUES (3, 'Karl Olofsson');
+INSERT INTO "public"."thm_person" ("id", "person_name") VALUES (4, 'Ludwig Ryden');
 ALTER TABLE "public"."thm_project_person" ADD CONSTRAINT "FK_thm_project_person_project_id" FOREIGN KEY ("project_id") REFERENCES "public"."thm_project" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE "public"."thm_project_person" ADD CONSTRAINT "FK_thm_person_project_person_id" FOREIGN KEY ("person_id") REFERENCES "public"."thm_person" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
