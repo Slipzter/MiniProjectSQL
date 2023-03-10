@@ -114,7 +114,7 @@ namespace MiniProjectSQL
 
                     cmd.CommandText = "INSERT INTO \"public\".\"thm_project_person\" " +
                                             "(\"project_id\", \"person_id\", \"hours\") " +
-                                            ($"VALUES ('{personId}', '{projectId}', '{hours}');");
+                                            ($"VALUES ('{projectId}', '{personId}', '{hours}');");
                     cmd.ExecuteNonQuery();
                 }
             }

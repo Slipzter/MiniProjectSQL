@@ -10,10 +10,11 @@
                     "Register Person",
                     "Register Project",
                     "Register Project Assignment",
-                    "Show Overview of Projects"
+                    "Show Overview of Projects",
+                    "Exit"
                 };
 
-            bool[] choices = { true, false, false, false, };
+            bool[] choices = { true, false, false, false, false };
 
             int x = 0;
 
@@ -57,12 +58,20 @@
                 {
                     Console.WriteLine(" " + " " + main_Menu[3]);
                 }
+                if (choices[4] == true)
+                {
+                    Console.WriteLine("[ " + main_Menu[4] + " ]");
+                }
+                else if (choices[4] == false)
+                {
+                    Console.WriteLine(" " + " " + main_Menu[4]);
+                }
 
                 ConsoleKeyInfo key = Console.ReadKey();
 
                 if (key.Key == ConsoleKey.DownArrow)
                 {
-                    if (x == 3)
+                    if (x == 4)
                     {
                         choices[0] = true;
                         choices[x] = false;
@@ -80,9 +89,9 @@
                 {
                     if (x == 0)
                     {
-                        choices[3] = true;
+                        choices[4] = true;
                         choices[x] = false;
-                        x = 5;
+                        x = 4;
                     }
                     else
                     {
@@ -103,24 +112,30 @@
                         case 0:
                             Console.Clear();
                             Console.WriteLine("You selected: Register new person.");
+                            Console.WriteLine();
                             Console.Write("Please enter the person's Full name: ");
                             string fullName = Console.ReadLine();
                             PostgresDataAccess.RegisterPerson(fullName);
                             Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine();
                             Console.WriteLine("Register complete.");
                             Console.ResetColor();
+                            Console.WriteLine();
                             Console.WriteLine("Press any key to return to the main menu.");
                             Console.ReadKey();
                             break;
                         case 1:
                             Console.Clear();
                             Console.WriteLine("You selected: Register new project.");
+                            Console.WriteLine();
                             Console.Write("Please enter project name: ");
                             string projectName = Console.ReadLine();
                             PostgresDataAccess.RegisterProject(projectName);
                             Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine();
                             Console.WriteLine("Register complete.");
                             Console.ResetColor();
+                            Console.WriteLine();
                             Console.WriteLine("Press any key to return to the main menu.");
                             Console.ReadKey();
                             break;
@@ -131,12 +146,16 @@
 
                             Console.Clear();
                             Console.WriteLine("You selected: Project Assignment");
+                            Console.WriteLine();
                             Console.Write("Please enter the full name of the person to be assigned: ");
                             string assignedName = Console.ReadLine();
+                            Console.WriteLine();
                             Console.Write("And what project should he/she be assigned to?: ");
                             string assignedProject = Console.ReadLine();
+                            Console.WriteLine();
                             Console.Write("How many hours has he/she worked on this project? (only integers are valid): ");
                             int assignedHours = int.Parse(Console.ReadLine());
+                            Console.WriteLine();
 
                             // Kollar om input stämmer överens med registrerade personer och projekt från databasen
                             foreach (var pers in persons)
@@ -155,9 +174,11 @@
                             }
 
                             PostgresDataAccess.AssignProject(personId, projectId, assignedHours);
+                            Console.WriteLine();
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("Assignment complete.");
                             Console.ResetColor();
+                            Console.WriteLine();
                             Console.WriteLine("Press any key to return to the main menu.");
                             Console.ReadKey();
                             break;
@@ -171,20 +192,26 @@
                             {
                                 foreach (var pers in persons)
                                 {
-                                    if (p.person_id == pers.id)
+                                    if (pers.id == p.person_id )
                                     {
                                         person = pers.person_name;
                                     }
                                 }
                                 foreach (var proj in projects)
                                 {
-                                    if (p.project_id == proj.id)
+                                    if (proj.id == p.project_id )
                                     {
                                         project = proj.project_name;
                                     }
                                 }
+                                Console.WriteLine();
                                 Console.WriteLine($"{person} has worked on {project} for {p.hours} hours.");
                             }
+                            break;
+                        case 4:
+                            Console.WriteLine("Exiting...");
+                            Thread.Sleep( 1000 );
+                            Environment.Exit(0);
                             break;
                     }
 
